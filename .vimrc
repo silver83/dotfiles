@@ -1,82 +1,62 @@
-" Make Vim more useful
-set nocompatible
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-" Enhance command-line completion
-set wildmenu
-" Allow cursor keys in insert mode
-set esckeys
-" Allow backspace in insert mode
-set backspace=indent,eol,start
-" Optimize for fast terminal connections
-set ttyfast
-" Add the g flag to search/replace by default
-set gdefault
-" Use UTF-8 without BOM
-set encoding=utf-8 nobomb
-" Change mapleader
-let mapleader=","
-" Don’t add empty newlines at the end of files
-set binary
-set noeol
+set nocompatible						" Make Vim more useful
+set clipboard=unnamed					" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set wildmenu							" Enhance command-line completion
+set esckeys 							" Allow cursor keys in insert mode
+set backspace=indent,eol,start			" Allow backspace in insert mode
+set ttyfast								" Optimize for fast terminal connections
+set gdefault							" Add the g flag to search/replace by default
+set encoding=utf-8 nobomb				" Use UTF-8 without BOM
+let mapleader=","						" Change mapleader
+set binary								
+set noeol 								" Don't add empty newlines at the end of files
+
 " Centralize backups, swapfiles and undo history
+silent execute '!mkdir -p ~/.vim/backups ~/.vim/swaps ~/.vim/undo'
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
 
-" Respect modeline in files
-set modeline
+set modeline							" Respect modeline in files
 set modelines=4
-" Enable per-directory .vimrc files and disable unsafe commands in them
-set exrc
-set secure
-" Enable line numbers
-set number
-" Enable syntax highlighting
-syntax on
-" Highlight current line
-set cursorline
-" Make tabs as wide as two spaces
-set tabstop=2
-" Show “invisible” characters
-set lcs=tab:▸\ ,trail:·,eol:¬,nbsp:_
-set list
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Always show status line
-set laststatus=2
-" Enable mouse in all modes
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Don’t reset cursor to start of line when moving around.
-set nostartofline
-" Show the cursor position
-set ruler
-" Don’t show the intro message when starting Vim
-set shortmess=atI
-" Show the current mode
-set showmode
-" Show the filename in the window titlebar
-set title
-" Show the (partial) command as it’s being typed
-set showcmd
-" Use relative line numbers
-if exists("&relativenumber")
-	set relativenumber
-	au BufReadPost * set relativenumber
-endif
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
 
-" Strip trailing whitespace (,ss)
-function! StripWhitespace()
+"set exrc								" Enable per-directory .vimrc files and disable unsafe commands in them
+set secure
+set number								" Enable line numbers
+syntax on								" Enable syntax highlighting
+set cursorline							" Highlight current line
+
+set tabstop=2							" Make tabs as wide as two spaces
+set shiftwidth=4						" size of an indent
+set expandtab							" use spaces
+set autoindent							
+set smartindent
+
+"set lcs=trail:·						
+"set list 								" Show invisible characters
+set hlsearch 							" Highlight searches
+set ignorecase							" Ignore case of searches
+
+set incsearch							" Highlight dynamically as pattern is typed
+set laststatus=2						" Always show status line
+
+set mouse=a								" Enable mouse in all modes
+
+set noerrorbells						" Disable error bells
+
+set nostartofline						" Don’t reset cursor to start of line when moving around.
+
+set ruler								" Show the cursor position
+set shortmess=atI						" Don’t show the intro message when starting Vim
+set showmode							" Show the current mode
+
+set title								" Show the filename in the window titlebar
+set showcmd								" Show the (partial) command as it’s being typed
+set scrolloff=3							" Start scrolling three lines before the horizontal window border
+
+
+function! StripWhitespace()				" Strip trailing whitespace (,ss)
 	let save_cursor = getpos(".")
 	let old_query = getreg('/')
 	:%s/\s\+$//e
@@ -84,11 +64,11 @@ function! StripWhitespace()
 	call setreg('/', old_query)
 endfunction
 noremap <leader>ss :call StripWhitespace()<CR>
-" Save a file as root (,W)
-noremap <leader>W :w !sudo tee % > /dev/null<CR>
 
-" Automatic commands
-if has("autocmd")
+noremap <leader>W :w !sudo tee % > /dev/null<CR>	" Save a file as root (,W)
+
+
+if has("autocmd")						" Automatic commands
 	" Enable file type detection
 	filetype on
 	" Treat .json files as .js
