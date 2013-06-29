@@ -1,1 +1,1 @@
-export PATH=$PATH:/usr/local/share/python/:/usr/local/share/npm/bin:$HOME/.rvm/bin
+export PATH=$PATH:/usr/local/share/python:/usr/local/share/npm/bin:$HOME/.rvm/bin 

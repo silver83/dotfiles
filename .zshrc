@@ -1,3 +1,9 @@
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+  [ -r "$file" ] && source "$file"
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -6,18 +12,6 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="cloud"
-
-# Example aliases
-alias zshconfig='vim ~/.zshrc'
-alias src='cd Code/projects'
-alias gd='git difftool'
-alias gc='git commit -a -m'
-alias ga='git add .'
-alias gs='git status -s'
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
@@ -32,7 +26,7 @@ alias gs='git status -s'
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -49,6 +43,5 @@ syspip(){
 
 #stuff for virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PATH=$PATH:/usr/local/share/python:/usr/local/share/npm/bin:$HOME/.rvm/bin 
 source /usr/local/share/python/virtualenvwrapper.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
