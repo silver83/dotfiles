@@ -1,6 +1,8 @@
+source ~/.aliases
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you donâ€™t want to commit.
+# * ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
   [ -r "$file" ] && source "$file"
 done
@@ -12,10 +14,17 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="cloud"
+ZSH_THEME="cloud" #"robbyrussell"
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -27,14 +36,22 @@ ZSH_THEME="cloud"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(gitfast)
 
 source $ZSH/oh-my-zsh.sh
+alias ping='nocorrect ping'
+
+autoload -U zmv
+alias mmv='noglob zmv -W'
+
+__git_files () { 
+    _wanted files expl 'local files' _files     
+}
 
 #make pip mandate an active virtual environment for any installation
 export PIP_REQUIRE_VIRTUALENV=true
@@ -44,5 +61,10 @@ syspip(){
 
 #stuff for virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/share/python/virtualenvwrapper.sh
+[[ -s /usr/local/share/python/virtualenvwrapper.sh ]] && source /usr/local/share/python/virtualenvwrapper.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+export CHROME_BIN="C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
+
+# Customize to your needs...
+export PATH=$PATH:/usr/local/bin:/usr/bin:/cygdrive/c/windows/system32:/cygdrive/c/windows:/cygdrive/c/windows/System32/Wbem:/cygdrive/c/windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/Program
